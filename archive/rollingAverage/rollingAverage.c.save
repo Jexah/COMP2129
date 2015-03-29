@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+#DEFINE TOTAL_NUMBERS = 4;a
+
+int main(void)
+{
+	char buf[1];
+	char values[4];
+	char current = 0;
+	while(NULL != fgets(buf, sizeof(buf), stdin))
+	{
+		*(values+current++) = *(buf);
+		if(current >= 4)
+		{
+			char total = 0;
+			for(char i = 0; i < 4; ++i)
+			{
+				current += *(values+i);
+			}
+			printf(current / 4.0);
+		}
+	}
+	return 0;
+}
