@@ -39,6 +39,9 @@ int appendNumber(int x, array_t **target)
 int main(void)
 {
 	array_t *myArray = createArray();
+
+	printf("%d", myArray->head[0]);
+
 	if(appendNumber(5, &myArray))
 	{
 		printf("Success!");
