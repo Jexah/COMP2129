@@ -13,6 +13,7 @@ int prependToList(Node *list, Node *node)
 {
 	node->next = list;
 	list = node;
+	return 1;
 }
 
 Node *createNode(void)
