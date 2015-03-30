@@ -18,7 +18,7 @@ array_t *createArray(void)
 	array_t *newArray = calloc(sizeof(array_t), 1);
 	newArray->length = 0;
 	newArray->capacity = 4;
-	newArray->head = calloc(sizeof(int), newArray.capacity);
+	newArray->head = calloc(sizeof(int), newArray->capacity);
 	if(newArray->head == NULL) die();
 	return newArray;
 }
@@ -31,7 +31,7 @@ int appendNumber(int x, array_t *target)
 		if(temp == NULL) return 0;
 		target->head = temp;
 	}
-	target->head[length++] = x;
+	target->head[target->length++] = x;
 	return 1;
 }
 
