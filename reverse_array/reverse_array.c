@@ -41,10 +41,12 @@ int main(void)
 	array_t *myArray = createArray();
 
 	printf("%d", myArray->head[0]);
+	printf("%p", myArray);
 
 	if(appendNumber(5, &myArray))
 	{
 		printf("Success!");
+		print("%p", myArray);
 		printf("%d", myArray->head[0]);
 	}
 	return 0;
