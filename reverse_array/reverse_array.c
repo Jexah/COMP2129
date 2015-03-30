@@ -42,7 +42,7 @@ int main(void)
 	if(appendNumber(5, &myArray))
 	{
 		printf("Success!");
-		printf("%d", *myArray->head[0]);
+		printf("%d", myArray->head[0]);
 	}
 	return 0;
 }
