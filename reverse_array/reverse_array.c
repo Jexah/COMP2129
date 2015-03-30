@@ -46,7 +46,7 @@ int main(void)
 	if(appendNumber(5, &myArray))
 	{
 		printf("Success!");
-		print("%p", myArray);
+		printf("%p", myArray);
 		printf("%d", myArray->head[0]);
 	}
 	return 0;
