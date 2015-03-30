@@ -39,16 +39,9 @@ int main(void)
 {
 	array_t *myArray = createArray();
 
-	printf("%d\n", myArray->head[0]);
-	printf("%p\n", myArray->head);
-	printf("%p\n", myArray);
+	int i = 0;
 
-	if(appendNumber(5, myArray))
-	{
-		printf("Success!\n");
-		printf("%p\n", myArray);
-		printf("%p\n", myArray->head);
-		printf("%d\n", myArray->head[0]);
-	}
+	while(appendNumber(i++, myArray));
+
 	return 0;
 }
