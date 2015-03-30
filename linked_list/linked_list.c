@@ -9,10 +9,10 @@ struct Node
 	int value;
 };
 
-int prependToList(Node *list, Node *node)
+int prependToList(Node **list, Node **node)
 {
-	node->next = list;
-	list = node;
+	*node->next = *list;
+	*list = *node;
 	return 1;
 }
 
@@ -32,7 +32,7 @@ int main(void)
 
 	node->value = 5;
 
-	prependToList(list, node);
+	prependToList(&list, &node);
 
 	printf("%d\n", list->value);
 
