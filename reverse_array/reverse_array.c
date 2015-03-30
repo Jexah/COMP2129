@@ -25,14 +25,14 @@ array_t *createArray(void)
 
 int appendNumber(int x, void **target)
 {
-	if((array_t *)*target->length == (array_t *)*target->capacity)
+	if(((array_t *)*target)->length == ((array_t *)*target)->capacity)
 	{
 		array_t *newArray = realloc((array_t *)*target, sizeof(int) * capacity * 2);
 		if(newArray == NULL) return 0;
 		**target = newArray;
-		(array_t *)*target->capacity *= 2;
+		((array_t *)*target)->capacity *= 2;
 	}
-	(array_t *)*target->head[length] = x;
+	((array_t *)*target)->head[length] = x;
 	return 1;
 }
 
