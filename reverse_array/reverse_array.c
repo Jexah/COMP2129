@@ -42,20 +42,12 @@ int main(void)
 
 	char buf[10] = {0};
 
-	int i = 0;
-
 	while(NULL != fgets(buf, sizeof(buf), stdin))
 	{
-		for(int i = 0; i < 10; ++i)
-		{
-			if(buf[i] >= '0' && buf[i] <= '9')
-			{
-				appendNumber(buf[i] - '0', myArray);
-			}
-		}
+		appendNumber(atoi(buf), myArray);
 	}
 
-	for(int i = myArray->length; i >= 0; ++i)
+	for(int i = myArray->length; i >= 0; --i)
 	{
 		printf("%d\n", myArray->head[i]);
 	}
