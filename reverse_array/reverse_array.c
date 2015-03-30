@@ -18,7 +18,7 @@ array_t *createArray(void)
 	array_t newArray;
 	newArray.length = 0;
 	newArray.capacity = 4;
-	newArray.head = calloc(sizeof(int) * capacity);
+	newArray.head = calloc(sizeof(int) * newArray.capacity);
 	if(newArray.head == NULL) die();
 	return &newArray;
 }
