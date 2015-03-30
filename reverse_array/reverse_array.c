@@ -48,7 +48,7 @@ int main(void)
 	{
 		printf("Success!\n");
 		printf("%p\n", myArray);
-		printf("%d\n", myArray->head);
+		printf("%p\n", myArray->head);
 		printf("%d\n", myArray->head[0]);
 	}
 	return 0;
