@@ -24,6 +24,11 @@ Node *createNode(void)
 	return temp;
 }
 
+int freeNode(Node *target)
+{
+	free(target);
+}
+
 int main(void)
 {
 	Node *list = createNode();
@@ -35,6 +40,9 @@ int main(void)
 	prependToList(&list, &node);
 
 	printf("%d\n", list->value);
+
+	freeNode(list);
+	freeNode(node);
 
 	return 0;
 }
