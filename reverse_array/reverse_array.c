@@ -29,7 +29,7 @@ int appendNumber(int x, array_t **target)
 	{
 		array_t *newArray = realloc((array_t *)*target, sizeof(int) * ((array_t *)*target)->capacity * 2);
 		if(newArray == NULL) return 0;
-		(array_t)**target = newArray;
+		**target = newArray;
 		((array_t *)*target)->capacity *= 2;
 	}
 	((array_t *)*target)->head[((array_t *)*target)->length] = x;
