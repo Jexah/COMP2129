@@ -23,7 +23,26 @@ array_t *createArray(void)
 	return &newArray;
 }
 
+int appendNumber(int x, array_t **target)
+{
+	if(*target->length == *target->capacity)
+	{
+		array_t *newArray = realloc(*target, sizeof(int) * capacity * 2);
+		if(newArray == NULL) return 0;
+		*target = newArray;
+		*target->capacity *= 2;
+	}
+	*target->head[length] = x;
+	return 1;
+}
+
 int main(void)
 {
 	array_t *myArray = createArray();
+	if(appendNumber(5, &myArray))
+	{
+		printf("Success!");
+		printf("%d", myArray->head[0]);
+	}
+	return 0;
 }
