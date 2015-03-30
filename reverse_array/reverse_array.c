@@ -43,7 +43,7 @@ int main(void)
 	printf("%p\n", myArray->head);
 	printf("%p\n", myArray);
 
-	if(appendNumber(5, &myArray))
+	if(appendNumber(5, myArray))
 	{
 		printf("Success!\n");
 		printf("%p\n", myArray);
