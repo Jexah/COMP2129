@@ -40,12 +40,25 @@ int main(void)
 {
 	array_t *myArray = createArray();
 
+	char buf[10] = {0};
+
 	int i = 0;
 
-	while(appendNumber(i++, myArray))
+	while(NULL != fgets(buf, sizeof(buf), stdin))
 	{
-		printf("myArray[%d] = %d\n", i-1, myArray->head[i-1]);
-	};
+		for(int i = 0; i < 10; ++i)
+		{
+			if(buf[i] >= '0' && buf[i] <= '9')
+			{
+				appendNumber(buf[i] - '0', myArray);
+			}
+		}
+	}
+
+	for(int i = myArray->length; i >= 0; ++i)
+	{
+		printf("%d\n", myArray->head[i]);
+	}
 
 	return 0;
 }
