@@ -36,6 +36,12 @@ int appendNumber(int x, array_t *target)
 	return 1;
 }
 
+int cleanArray(array_t *target)
+{
+	free(target->head);
+	free(target);
+}
+
 int main(void)
 {
 	array_t *myArray = createArray();
@@ -51,6 +57,8 @@ int main(void)
 	{
 		printf("%d\n", myArray->head[i]);
 	}
+
+	cleanArray(myArray);
 
 	return 0;
 }
