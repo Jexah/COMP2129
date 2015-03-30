@@ -25,6 +25,7 @@ array_t *createArray(void)
 
 int appendNumber(int x, array_t *target)
 {
+	if(target->length > 100){return 0;}
 	if(target->length == target->capacity)
 	{
 		void *temp = realloc(target->head, sizeof(int) * target->capacity * 2);
@@ -41,7 +42,10 @@ int main(void)
 
 	int i = 0;
 
-	while(appendNumber(i++, myArray));
+	while(appendNumber(i++, myArray))
+	{
+		printf("myArray[%d] = %d\n", i-1, myArray->head[i-1]);
+	};
 
 	return 0;
 }
