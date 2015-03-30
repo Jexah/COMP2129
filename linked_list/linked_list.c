@@ -7,7 +7,7 @@ struct Node
 {
 	Node *next;
 	int value;
-}
+};
 
 int prependToList(Node *list, Node *node)
 {
