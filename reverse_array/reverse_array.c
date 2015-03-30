@@ -30,9 +30,9 @@ int appendNumber(int x, array_t **target)
 		array_t *newArray = realloc((array_t *)*target, sizeof(int) * ((array_t *)*target)->capacity * 2);
 		if(newArray == NULL) return 0;
 		*target = newArray;
-		((array_t *)*target)->capacity *= 2;
+		((array_t *)*target)->capacity = ((array_t *)*target)->capacity * 2;
 	}
-	((array_t *)*target)->head[((array_t *)*target)->length] = x;
+	((array_t *)*target)->head[((array_t *)*target)->length++] = x;
 	return 1;
 }
 
@@ -42,7 +42,7 @@ int main(void)
 	if(appendNumber(5, &myArray))
 	{
 		printf("Success!");
-		printf("%d", myArray->head[0]);
+		printf("%d", myArray->head+0);
 	}
 	return 0;
 }
