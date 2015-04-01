@@ -17,6 +17,10 @@ int main(void)
 					if(x == 0 || x == width-1)
 					{
 						printf("+");
+						if(y != height-1)
+						{
+							printf("\n");
+						}
 					}
 					else
 					{
