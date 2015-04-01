@@ -8,14 +8,17 @@ typedef struct Size
 	int height;
 } Size;
 
+
 Size *populateSize(char *input, Size *size)
 {
 	if(strlen(input) < 3 || strlen(input) > 5)
 	{
-		die("Invalid input");
+		perror("Invalid input");
+		exit(1);
 	}
-	size->width = atoi(input[0]);
-	size->height = atoi(input[2]);
+	size->width = atoi(&input[0]);
+	size->height = atoi(&input[2]);
+	return size;
 }
 
 int isSizeAcceptable(Size *size)
@@ -31,12 +34,6 @@ int isSizeAcceptable(Size *size)
 	return 1;
 }
 
-void die(char *errorMessage)
-{
-	perror("%s", *errorMessage);
-	exit(1);
-}
-
 int main(void)
 {
 	char buf[5];
@@ -48,7 +45,8 @@ int main(void)
 		populateSize(buf, &size);
 		if(!isSizeAcceptable(&size))
 		{
-			die("Invalid input");
+			perror("Invalid input");
+			exit(1);
 		}
 		for(int y = 0; y < size.height; ++y)
 		{
