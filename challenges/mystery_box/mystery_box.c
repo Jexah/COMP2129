@@ -6,7 +6,7 @@ typedef struct Size
 {
 	int width;
 	int height;
-}
+} Size;
 
 Size *populateSize(char *input, Size *size)
 {
