@@ -38,8 +38,8 @@ int main(void)
 {
 	char buf[6];
 	printf("Enter the size of the box: ");
-
-	if(fgets(buf, sizeof(buf), stdin))
+	int success = 0;
+	if(fgets(buf, sizeof(buf), stdin) != NULL)
 	{
 		Size size;
 		populateSize(buf, &size);
@@ -84,6 +84,12 @@ int main(void)
 				}
 			}
 		}
+		success = 1;
+	}
+	if(!success)
+	{
+		printf("Invalid input");
+		return 1;
 	}
 	return 0;
 }
