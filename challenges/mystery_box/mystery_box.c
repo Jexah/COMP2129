@@ -88,7 +88,7 @@ int main(void)
 	}
 	if(!success)
 	{
-		printf("Invalid input");
+		printf("\nInvalid input");
 		return 1;
 	}
 	return 0;
