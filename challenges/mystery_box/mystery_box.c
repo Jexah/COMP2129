@@ -45,6 +45,9 @@ int main(void)
 			}
 		}
 	}
-	printf("Invalid input");
+	else
+	{
+		printf("Invalid input");
+	}
 	return 0;
 }
