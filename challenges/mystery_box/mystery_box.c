@@ -80,7 +80,7 @@ int main(void)
 					else
 					{
 						printf(" ");
-					}C
+					}
 				}
 			}
 		}
