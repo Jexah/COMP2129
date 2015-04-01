@@ -14,7 +14,7 @@ Size *populateSize(char *input, Size *size)
 	if(strlen(input) < 3 || strlen(input) > 5)
 	{
 		perror("Invalid input");
-		exit(1);
+		exit(0);
 	}
 	size->width = atoi(&input[0]);
 	size->height = atoi(&input[2]);
@@ -46,7 +46,7 @@ int main(void)
 		if(!isSizeAcceptable(&size))
 		{
 			perror("Invalid input");
-			exit(1);
+			exit(0);
 		}
 		for(int y = 0; y < size.height; ++y)
 		{
