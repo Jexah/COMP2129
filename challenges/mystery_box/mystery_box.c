@@ -50,16 +50,16 @@ int main(void)
 		{
 			die("Invalid input");
 		}
-		for(int y = 0; y < size->height; ++y)
+		for(int y = 0; y < size.height; ++y)
 		{
-			for(int x = 0; x < size->width; ++x)
+			for(int x = 0; x < size.width; ++x)
 			{
-				if(y == 0 || y == size->height-1)
+				if(y == 0 || y == size.height-1)
 				{
-					if(x == 0 || x == size->width-1)
+					if(x == 0 || x == size.width-1)
 					{
 						printf("+");
-						if(y != size->height-1 && x == size->width-1)
+						if(y != size.height-1 && x == size.width-1)
 						{
 							printf("\n");
 						}
@@ -71,10 +71,10 @@ int main(void)
 				}
 				else
 				{
-					if(x == 0 || x == size->width-1)
+					if(x == 0 || x == size.width-1)
 					{
 						printf("|");
-						if(x == size->width-1)
+						if(x == size.width-1)
 						{
 							printf("\n");
 						}
