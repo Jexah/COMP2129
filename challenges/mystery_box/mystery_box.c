@@ -36,7 +36,7 @@ int isSizeAcceptable(Size *size)
 
 int main(void)
 {
-	char buf[5];
+	char buf[6];
 	printf("Enter the size of the box: ");
 
 	if(fgets(buf, sizeof(buf), stdin))
