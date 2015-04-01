@@ -14,7 +14,7 @@ int main(void)
 			{
 				if(y == 0 || y == height-1)
 				{
-					if(x == 0 || x == width-1))
+					if(x == 0 || x == width-1)
 					{
 						printf("+");
 						if(x == width-1)
