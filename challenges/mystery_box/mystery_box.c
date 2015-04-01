@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.g>
+#include <string.h>
 
 typedef struct Size
 {
