@@ -40,10 +40,12 @@ Status verifyQuadratic(Quadratic *quad)
 	if(quad->a == 0)
 	{
 		printf("'a' must be non-zero");
+		return FAIL;
 	}
 	else if(quad->b == 0)
 	{
 		printf("'b' must be non-zero");
+		return FAIL;
 	}
 	else if(quad->c == 0)
 	{
@@ -64,6 +66,30 @@ Status solveRoots(Quadratic *quad, Roots *roots)
 	return SUCCESS;
 }
 
+float getFloat(char *string)
+{
+	char *errorBuffer;
+	*errorBuffer = 0;
+	float tmp = (float)(strtod(string, &errorBuffer));
+	printf("'%c'", *errorBuffer);
+	if(*errorBuffer == ' ' || *errorBuffer == '\n' || *errorBuffer == '\0')
+	{
+		return tmp;
+	}
+	printf("Invalid input1");
+	exit(FAIL);
+}
+
+Status getFloats(char *string, Quadratic *quad)
+{
+	quad->a = getFloat(string);
+	char *firstSpace = strchr(string, ' ');
+	quad->b = getFloat(firstSpace);
+	char *secondSpace = strchr(firstSpace+1, ' ');
+	quad->c = getFloat(secondSpace);
+	return SUCCESS;
+}
+
 
 int main(void)
 {
@@ -72,17 +98,13 @@ int main(void)
 	{
 		Quadratic quad;
 		initializeQuadratic(&quad);
-		quad.a = atof(buffer);
-		char *firstSpace = strchr(buffer, ' ');
-		quad.b = atof(firstSpace);
-		char *secondSpace = strchr(firstSpace+1, ' ');
-		quad.c = atof(secondSpace);
+
+		Roots roots;
+		initializeRoots(&roots);
+		getFloats(buffer, &quad);
 
 		if(verifyQuadratic(&quad) == SUCCESS)
 		{
-			Roots roots;
-			initializeRoots(&roots);
-
 			if(solveRoots(&quad, &roots) == SUCCESS)
 			{
 				printf("X1: %.1f\n", roots.x1);
@@ -104,7 +126,7 @@ int main(void)
 	}
 	else
 	{
-		printf("Invalid input");
+		printf("'%s'Invalid input2", buffer);
 		return FAIL;
 	}
 	return SUCCESS;
