@@ -21,21 +21,6 @@ typedef struct Roots
 	float x2;
 } Roots;
 
-Status initializeQuadratic(Quadratic *quad)
-{
-	quad->a = 0;
-	quad->b = 0;
-	quad->c = 0;
-	return SUCCESS;
-}
-
-Status initializeRoots(Roots *roots)
-{
-	roots->x1 = 0;
-	roots->x2 = 0;
-	return SUCCESS;
-}
-
 Status verifyQuadratic(Quadratic *quad)
 {
 	if(quad->a == 0)
@@ -58,12 +43,12 @@ Status verifyQuadratic(Quadratic *quad)
 
 Status solveRoots(Quadratic *quad, Roots *roots)
 {
-	if(quad->b*quad->b - 4*quad->a*quad->c < 0)
+	if(pow(quad->b, 2) - 4*quad->a*quad->c < 0)
 	{
 		return FAIL;
 	}
-	roots->x1 = ((-quad->b) - sqrt((quad->b*quad->b)-(4*quad->a*quad->c))) / (2*quad->a);
-	roots->x2 = ((-quad->b) + sqrt((quad->b*quad->b)-(4*quad->a*quad->c))) / (2*quad->a);
+	roots->x1 = ((-quad->b) - sqrt(pow(quad->b, 2)-(4*quad->a*quad->c))) / (2*quad->a);
+	roots->x2 = ((-quad->b) + sqrt(pow(quad->b, 2)-(4*quad->a*quad->c))) / (2*quad->a);
 	return SUCCESS;
 }
 
@@ -71,10 +56,14 @@ float getFloat(char *string)
 {
 	char *errorBuffer;
 	*errorBuffer = 0;
+	printf("YOLO111");
 	float tmp = (float)(strtod(string, &errorBuffer));
+	printf("YOLO222");
 	printf("'%c'", *errorBuffer);
-	if(*errorBuffer == ' ' || *errorBuffer == '\n' || *errorBuffer == '\0')
+	if(*errorBuffer == ' ' || *errorBuffer == '\n' || *errorBuffer == 0)
 	{
+		printf("YOLO333");
+		printf("'%f'", tmp);
 		return tmp;
 	}
 	printf("Invalid input1");
@@ -83,11 +72,22 @@ float getFloat(char *string)
 
 Status getFloats(char *string, Quadratic *quad)
 {
+	printf("\n1");
 	quad->a = getFloat(string);
+	printf("\n2");
 	char *firstSpace = strchr(string, ' ');
-	quad->b = getFloat(firstSpace);
+	if(firstSpace == NULL)
+	{
+		printf("Whoops1");
+	}
+	printf("\n3");
+	printf("%p :: %p", string, firstSpace);
+	quad->b = getFloat(firstSpace+1);
+	printf("\n4");
 	char *secondSpace = strchr(firstSpace+1, ' ');
+	printf("\n5");
 	quad->c = getFloat(secondSpace);
+	printf("\n6");
 	return SUCCESS;
 }
 
@@ -97,32 +97,29 @@ int main(void)
 	char buffer[25];
 	if(fgets(buffer, sizeof(buffer), stdin) != NULL)
 	{
-		Quadratic quad;
-		initializeQuadratic(&quad);
+		Quadratic quad = {0};
+		Roots roots = {0};
 
-		Roots roots;
-		initializeRoots(&roots);
 		getFloats(buffer, &quad);
 
-		if(verifyQuadratic(&quad) == SUCCESS)
+		printf("Pre-verify");
+
+		if(verifyQuadratic(&quad) == FAIL)
 		{
-			if(solveRoots(&quad, &roots) == SUCCESS)
-			{
-				printf("X1: %.1f\n", roots.x1);
-				if(roots.x1 != roots.x2)
-				{
-					printf("X2: %.1f", roots.x2);
-				}
-			}
-			else
-			{
-				printf("No roots");
-				exit(1);
-			}
+			printf("Failed to verify");
+			return FAIL;
 		}
-		else
+
+		if(solveRoots(&quad, &roots) == FAIL)
 		{
+			printf("No roots");
 			return(FAIL);
+		}
+
+		printf("X1: %.1f\n", roots.x1);
+		if(roots.x1 != roots.x2)
+		{
+			printf("X2: %.1f", roots.x2);
 		}
 	}
 	else
