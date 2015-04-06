@@ -8,6 +8,11 @@ typedef enum
 	SUCCESS, FAIL
 } Status;
 
+typedef enum
+{
+	VALID, A, B, C
+} Validity;
+
 typedef struct Quadratic
 {
 	float a;
@@ -21,24 +26,21 @@ typedef struct Roots
 	float x2;
 } Roots;
 
-Status verifyQuadratic(Quadratic *quad)
+Validity verifyQuadratic(Quadratic *quad)
 {
 	if(quad->a == 0)
 	{
-		printf("'a' must be non-zero");
-		return FAIL;
+		return A;
 	}
 	else if(quad->b == 0)
 	{
-		printf("'b' must be non-zero");
-		return FAIL;
+		return B;
 	}
 	else if(quad->c == 0)
 	{
-		printf("'c' must be non-zero");
-		return FAIL;
+		return C;
 	}
-	return SUCCESS;
+	return VALID;
 }
 
 Status solveRoots(Quadratic *quad, Roots *roots)
@@ -52,42 +54,43 @@ Status solveRoots(Quadratic *quad, Roots *roots)
 	return SUCCESS;
 }
 
-float getFloat(char *string)
+Status getFloat(char *string, float *container)
 {
-	char *errorBuffer;
-	*errorBuffer = 0;
-	printf("%d: Created Error Buffer\n", __LINE__);
-	float tmp = (float)(strtod(string, &errorBuffer));
-	printf("%d: ran strtod\n", __LINE__);
-	printf("%d: error char found='%c' (%d)\n", __LINE__, *errorBuffer, *errorBuffer);
-	if(*errorBuffer == ' ' || *errorBuffer == '\n' || *errorBuffer == 0)
+	char errorBuffer = 0;
+	char *errorBufferPtr = &errorBuffer;
+	float tmp = (float)(strtod(string, &errorBufferPtr));
+	if(*errorBufferPtr == ' ' || *errorBufferPtr == '\n' || *errorBufferPtr == 0)
 	{
-		printf("%d: error buffer was newline or space or zero\n", __LINE__);
-		printf("%d: float found='%f'\n", __LINE__, tmp);
-		return tmp;
+		*container = tmp;
+		return SUCCESS;
 	}
-	printf("%d: *errorBuffer was a different character, invalid input: '%c' (%d)\n", __LINE__, *errorBuffer, *errorBuffer);
-	exit(FAIL);
+	return(FAIL);
 }
 
 Status getFloats(char *string, Quadratic *quad)
 {
-	printf("1\n");
-	quad->a = getFloat(string);
-	printf("2\n");
+	if(getFloat(string, &(quad->a)) == FAIL)
+	{
+		return FAIL;
+	}
 	char *firstSpace = strchr(string, ' ');
 	if(firstSpace == NULL)
 	{
-		printf("%d: firstSpace address was null\n", __LINE__);
+		return FAIL;
 	}
-	printf("%d: firstSpace was not null.\n", __LINE__);
-	printf("%d: Address of string=%p :: Address of firstSpace=%p :: Address of firstSpace+1=%p\n", __LINE__, string, firstSpace, firstSpace+1);
-	quad->b = getFloat(firstSpace+1);
-	printf("\n4\n");
+	if(getFloat(firstSpace+1, &(quad->b)) == FAIL)
+	{
+		return FAIL;
+	}
 	char *secondSpace = strchr(firstSpace+1, ' ');
-	printf("\n5\n");
-	quad->c = getFloat(secondSpace);
-	printf("\n6\n");
+	if(secondSpace == NULL)
+	{
+		return FAIL;
+	}
+	if(getFloat(secondSpace+1, &(quad->c)) == FAIL)
+	{
+		return FAIL;
+	}
 	return SUCCESS;
 }
 
@@ -95,37 +98,55 @@ Status getFloats(char *string, Quadratic *quad)
 int main(void)
 {
 	char buffer[25];
-	if(fgets(buffer, sizeof(buffer), stdin) != NULL)
+	if(fgets(buffer, sizeof(buffer), stdin))
 	{
 		Quadratic quad = {0};
 		Roots roots = {0};
 
-		getFloats(buffer, &quad);
-
-		printf("Pre-verify");
-
-		if(verifyQuadratic(&quad) == FAIL)
+		if(getFloats(buffer, &quad) == FAIL)
 		{
-			printf("Failed to verify");
+			printf("Invalid input");
+			return FAIL;
+		};
+
+		Validity quadraticValidity = verifyQuadratic(&quad);
+		switch(quadraticValidity)
+		{
+			case A:
+				printf("'a'");
+				break;
+			case B:
+				printf("'b'");
+				break;
+			case C:
+				printf("'c'");
+				break;
+			case VALID:
+				break;
+		}
+		if(quadraticValidity != VALID)
+		{
+			printf(" must be non-zero");
 			return FAIL;
 		}
 
 		if(solveRoots(&quad, &roots) == FAIL)
 		{
-			printf("No roots");
+			printf("No roots\n");
 			return(FAIL);
 		}
 
-		printf("X1: %.1f\n", roots.x1);
 		if(roots.x1 != roots.x2)
 		{
-			printf("X2: %.1f", roots.x2);
+			printf("X1 = %.1f\n", roots.x1);
+			printf("X2 = %.1f", roots.x2);
 		}
+		else
+		{
+			printf("X = %.1f\n", roots.x1);
+		}
+		return SUCCESS;
 	}
-	else
-	{
-		printf("'%s'Invalid input2", buffer);
-		return FAIL;
-	}
-	return SUCCESS;
+	printf("Invalid input\n", buffer);
+	return FAIL;
 }
