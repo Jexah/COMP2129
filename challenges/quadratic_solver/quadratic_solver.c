@@ -56,38 +56,38 @@ float getFloat(char *string)
 {
 	char *errorBuffer;
 	*errorBuffer = 0;
-	printf("YOLO111");
+	printf("%d: Created Error Buffer\n", __LINE__);
 	float tmp = (float)(strtod(string, &errorBuffer));
-	printf("YOLO222");
-	printf("'%c'", *errorBuffer);
+	printf("%d: ran strtod\n", __LINE__);
+	printf("%d: error char found='%c' (%d)\n", __LINE__, *errorBuffer, *errorBuffer);
 	if(*errorBuffer == ' ' || *errorBuffer == '\n' || *errorBuffer == 0)
 	{
-		printf("YOLO333");
-		printf("'%f'", tmp);
+		printf("%d: error buffer was newline or space or zero\n", __LINE__);
+		printf("%d: float found='%f'\n", __LINE__, tmp);
 		return tmp;
 	}
-	printf("Invalid input1");
+	printf("%d: *errorBuffer was a different character, invalid input: '%c' (%d)\n", __LINE__, *errorBuffer, *errorBuffer);
 	exit(FAIL);
 }
 
 Status getFloats(char *string, Quadratic *quad)
 {
-	printf("\n1");
+	printf("1\n");
 	quad->a = getFloat(string);
-	printf("\n2");
+	printf("2\n");
 	char *firstSpace = strchr(string, ' ');
 	if(firstSpace == NULL)
 	{
-		printf("Whoops1");
+		printf("%d: firstSpace address was null\n", __LINE__);
 	}
-	printf("\n3");
-	printf("%p :: %p", string, firstSpace);
+	printf("%d: firstSpace was not null.\n", __LINE__);
+	printf("%d: Address of string=%p :: Address of firstSpace=%p :: Address of firstSpace+1=%p\n", __LINE__, string, firstSpace, firstSpace+1);
 	quad->b = getFloat(firstSpace+1);
-	printf("\n4");
+	printf("\n4\n");
 	char *secondSpace = strchr(firstSpace+1, ' ');
-	printf("\n5");
+	printf("\n5\n");
 	quad->c = getFloat(secondSpace);
-	printf("\n6");
+	printf("\n6\n");
 	return SUCCESS;
 }
 
