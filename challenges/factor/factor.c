@@ -42,7 +42,7 @@ int main(void)
 	{
 		for(int i = 0; i < 11; ++i)
 		{
-			if(*(buffer+i) != 0 && !isdigit(*(buffer+i)))
+			if(*(buffer+i) != 0 && *(buffer+i) != '\n' && !isdigit(*(buffer+i)))
 			{
 				printf("Invalid input1\n");
 				return 1;
