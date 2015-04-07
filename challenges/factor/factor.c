@@ -3,7 +3,6 @@
 #include <string.h>
 #include <ctype.h>
 
-
 char *getPrimeFactorsAsString(int input)
 {
 	char *buffer = malloc(sizeof(char) * 50);
@@ -38,7 +37,7 @@ char *getPrimeFactorsAsString(int input)
 
 int main(void)
 {
-	char *buffer = malloc(sizeof(char) * 11);
+	char *buffer = calloc(sizeof(char), 11);
 	if(fgets(buffer, sizeof(char)*11, stdin))
 	{
 		for(int i = 0; i < 11; ++i)
