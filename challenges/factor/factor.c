@@ -3,36 +3,31 @@
 #include <string.h>
 #include <ctype.h>
 
-char *getPrimeFactorsAsString(int input)
+void printPrimeFactorsAsString(int input)
 {
-	char *buffer = malloc(sizeof(char) * 50);
-	char *cursor = buffer;
-	int numberOfFactors = 0;
-	printf("getPrimeFactorsAsString(%d)", input);
-	for(int i = 2; i <= input / 2; ++i)
+	int first = 1;
+	for(int i = 2; i <= input; ++i)
 	{
 		if(input % i == 0)
 		{
 			int notPrime = 0;
-			for(int j = 2; j <= i / 2; j+=2)
+			for(int j = 2; j <= i; ++j)
 			{
-				if(i % j == 0)
+				if(i % j == 0 && i != j)
 				{
 					notPrime = 1;
 					break;
 				}
-				if(j == 2) --j;
 			}
 			if(!notPrime)
 			{
-				sprintf(cursor, "%d", i);
-				cursor += strlen(cursor)+1;
-				++numberOfFactors;
-				printf("%d", i);
+				input /= i;
+				printf((first?"%d":" %d"), i);
+				i = 1;
+				first = 0;
 			}
 		}
 	}
-	return "a";
 }
 
 int main(void)
@@ -42,9 +37,9 @@ int main(void)
 	{
 		for(int i = 0; i < 11; ++i)
 		{
-			if(*(buffer+i) != 0 && *(buffer+i) != '\n' && !isdigit(*(buffer+i)))
+			if(*(buffer+i) != 0 && *(buffer+i) != '\n' && *(buffer+i) != '-' && !isdigit(*(buffer+i)))
 			{
-				printf("Invalid input1\n");
+				printf("Invalid input\n");
 				return 1;
 			}
 		}
@@ -55,9 +50,9 @@ int main(void)
 			printf("%d has no prime factors", number);
 			return 1;
 		}
-		getPrimeFactorsAsString(2);
+		printPrimeFactorsAsString(number);
 		return 0;
 	}
-	printf("Invalid input2\n");
+	printf("Invalid input\n");
 	return 1;
 }
