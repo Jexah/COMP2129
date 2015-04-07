@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 
 char *getPrimeFactorsAsString(int input)
@@ -32,6 +33,7 @@ char *getPrimeFactorsAsString(int input)
 			}
 		}
 	}
+	return 'a';
 }
 
 int main(void)
