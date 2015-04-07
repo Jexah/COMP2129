@@ -33,7 +33,7 @@ char *getPrimeFactorsAsString(int input)
 			}
 		}
 	}
-	return 'a';
+	return "a";
 }
 
 int main(void)
@@ -45,7 +45,7 @@ int main(void)
 		{
 			if(*(buffer+i) != 0 && !isdigit(*(buffer+i)))
 			{
-				printf("Invalid input\n");
+				printf("Invalid input1\n");
 				return 1;
 			}
 		}
@@ -59,6 +59,6 @@ int main(void)
 		getPrimeFactorsAsString(2);
 		return 0;
 	}
-	printf("Invalid input\n");
+	printf("Invalid input2\n");
 	return 1;
 }
