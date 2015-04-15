@@ -30,6 +30,7 @@ void print_list(struct list_head *head_ptr)
 	{
 		current_line++;
 		printf("%d. %s\n", current_line, current_ptr->data);
+		current_ptr = current_ptr->next;
 	}
 }
 
