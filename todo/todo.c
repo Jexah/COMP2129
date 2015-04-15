@@ -94,7 +94,7 @@ int main(void)
 		{
 			char *data = calloc(sizeof(buf), 1);
 			strcpy_no_newline(data, get_pointer_to_arg(buf, 1));
-			struct list_head *element = calloc(sizeof(struct list_head));
+			struct list_head *element = calloc(sizeof(struct list_head), 1);
 			element->data = data;
 			list_add_tail(element, &list);
 			print_list(&list);
