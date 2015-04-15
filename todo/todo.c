@@ -30,7 +30,7 @@ void print_list(struct list_head *head_ptr)
 
 void populate_list(struct list_head *head_ptr)
 {
-	FILE *todo = fopen("todo.txt", "rw+");
+	FILE *todo = fopen("todo.txt", "r");
 	char buf[128];
 	while(fgets(buf, sizeof(buf), todo))
 	{
@@ -38,6 +38,7 @@ void populate_list(struct list_head *head_ptr)
 		element->data = malloc(sizeof(buf));
 		strcpy(element->data, buf);
 		list_add_tail(element, head_ptr);
+		printf("Prev: %s\nCurrent: %s\nNext: %s\n", element->prev->data, element->data, element->next->data);
 	}
 }
 
@@ -46,7 +47,7 @@ int main(void)
 	struct list_head list;
 	list_init(&list);
 	populate_list(&list);
-	print_list(&list);
+	//print_list(&list);
 
 	printf("\n> ");
 
