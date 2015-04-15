@@ -51,7 +51,7 @@ void populate_list(struct list_head *head_ptr)
 		{
 			head_ptr->data = calloc(sizeof(buf), 1);
 			strcpy_no_newline(head_ptr->data, buf);
-			list_init(element);
+			list_init(head_ptr);
 		}
 		printf("Prev: %s\nCurrent: %s\nNext: %s\n", element->prev->data, element->data, element->next->data);
 	}
