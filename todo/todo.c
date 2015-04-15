@@ -29,7 +29,7 @@ char *get_arg_from_command(char *start, int arg)
 
 void strcpy_no_newline(char *dst, char *src)
 {
-	while(*src != '\n' && (*dst++ = (*src != '\n') && *src++));
+	while(*src != '\n' && (*dst++ = *src++));
 }
 
 void print_list(struct list_head *head_ptr)
