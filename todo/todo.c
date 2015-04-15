@@ -4,7 +4,15 @@
 
 #include "list.h"
 
-void get_arg_from_command(char *start, int arg, char *buffer)
+char *get_arg_from_command(char *start, int arg)
+{
+	char *buffer = calloc(strlen(start), 1);
+	start = get_pointer_to_arg(start, arg);
+	while(*start != '\n' && *start != ' ' && (*buffer++ = *start++));
+	return buffer;
+}
+
+char *get_pointer_to_arg(char *start, int arg)
 {
 	for(int i = 0; i < arg; ++i)
 	{
@@ -13,7 +21,7 @@ void get_arg_from_command(char *start, int arg, char *buffer)
 			start = strchr(start, ' ');
 		}
 	}
-	while(*start != '\n' && *start != ' ' && (*buffer++ = *start++));
+	return start;
 }
 
 void strcpy_no_newline(char *dst, char *src)
@@ -48,14 +56,12 @@ void populate_list(struct list_head *head_ptr)
 			element->data = calloc(sizeof(buf), 1);
 			strcpy_no_newline(element->data, buf);
 			list_add_tail(element, head_ptr);
-			printf("Prev: %s\nCurrent: %s\nNext: %s\n", element->prev->data, element->data, element->next->data);
 		}
 		else
 		{
 			head_ptr->data = calloc(sizeof(buf), 1);
 			strcpy_no_newline(head_ptr->data, buf);
 			list_init(head_ptr);
-			printf("Prev: %s\nCurrent: %s\nNext: %s\n", head_ptr->prev->data, head_ptr->data, head_ptr->next->data);
 			head_initialized++;
 		}
 	}
@@ -85,6 +91,8 @@ int main(void)
 		}
 		else if(strcmp(arg, "new") == 0)
 		{
+			char *data = get_pointer_to_arg(1);
+			printf("ADDED: %S\nasd\n", data);
 			//fprintf(todo, "%s", strchr(buf, ' ')+1);
 		}
 		else if(strcmp(arg, "move") == 0)
