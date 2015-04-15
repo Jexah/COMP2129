@@ -107,9 +107,13 @@ int main(void)
 		{
 			int del = atoi(get_arg_from_command(buf, 1)), i = 1;
 			struct list_head *target = &list;
-			while(i++ != del)
+			while(i++ < del)
 			{
 				target = target->next;
+			}
+			if(target == list)
+			{
+				list = *(list->next);
 			}
 			list_del(target);
 			print_list(&list);
