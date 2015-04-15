@@ -40,10 +40,19 @@ void populate_list(struct list_head *head_ptr)
 	while(fgets(buf, sizeof(buf), todo))
 	{
 		printf("%s\n", buf);
-		struct list_head *element = calloc(sizeof(struct list_head), 1);
-		element->data = calloc(sizeof(buf), 1);
-		strcpy_no_newline(element->data, buf);
-		list_add_tail(element, head_ptr);
+		if(head_ptr)
+		{
+			struct list_head *element = calloc(sizeof(struct list_head), 1);
+			element->data = calloc(sizeof(buf), 1);
+			strcpy_no_newline(element->data, buf);
+			list_add_tail(element, head_ptr);
+		}
+		else
+		{
+			head_ptr->data = calloc(sizeof(buf), 1);
+			strcpy_no_newline(head_ptr->data, buf);
+			list_init(element);
+		}
 		printf("Prev: %s\nCurrent: %s\nNext: %s\n", element->prev->data, element->data, element->next->data);
 	}
 }
@@ -51,8 +60,6 @@ void populate_list(struct list_head *head_ptr)
 int main(void)
 {
 	struct list_head list;
-	list.data = 0;
-	list_init(&list);
 	populate_list(&list);
 	//print_list(&list);
 
