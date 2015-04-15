@@ -35,12 +35,13 @@ void print_list(struct list_head *head_ptr)
 
 void populate_list(struct list_head *head_ptr)
 {
+	static int head_initialized = 0;
 	FILE *todo = fopen("todo.txt", "r");
 	char buf[128];
 	while(fgets(buf, sizeof(buf), todo))
 	{
 		printf("%s\n", buf);
-		if(head_ptr)
+		if(head_initialized)
 		{
 			struct list_head *element = calloc(sizeof(struct list_head), 1);
 			element->data = calloc(sizeof(buf), 1);
@@ -54,6 +55,7 @@ void populate_list(struct list_head *head_ptr)
 			strcpy_no_newline(head_ptr->data, buf);
 			list_init(head_ptr);
 			printf("Prev: %s\nCurrent: %s\nNext: %s\n", head_ptr->prev->data, head_ptr->data, head_ptr->next->data);
+			head_initialized++;
 		}
 	}
 }
