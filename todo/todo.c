@@ -92,10 +92,12 @@ int main(void)
 		}
 		else if(strcmp(arg, "new") == 0)
 		{
-			char data[sizeof(buf)];
+			char *data = calloc(sizeof(buf), 1);
 			strcpy_no_newline(data, get_pointer_to_arg(buf, 1));
-			printf("ADDED: %s\nasd\n", data);
-			//fprintf(todo, "%s", strchr(buf, ' ')+1);
+			struct list_head *element = calloc(sizeof(struct list_head));
+			element->data = data;
+			list_add_tail(element, &list);
+			print_list(&list);
 		}
 		else if(strcmp(arg, "move") == 0)
 		{
