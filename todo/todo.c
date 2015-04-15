@@ -20,7 +20,7 @@ void print_list(struct list_head *head_ptr)
 {
 	int current_line = 1;
 	printf("%d. %s", current_line, head_ptr->data);
-	while((head_ptr = head_ptr->next) != head_ptr)
+	while((head_ptr = (head_ptr->next)) != head_ptr)
 	{
 		printf("%d. %s", current_line, head_ptr->data);
 		current_line++;
@@ -34,8 +34,8 @@ void populate_list(struct list_head *head_ptr)
 	while(fgets(buf, sizeof(buf), todo))
 	{
 		struct list_head *element = malloc(sizeof(struct list_head));
-		element->data = malloc(buf);
-		list_add_tail(element, list);
+		element->data = malloc(sizeof(buf));
+		list_add_tail(element, head_ptr);
 	}
 }
 
@@ -64,7 +64,7 @@ int main(void)
 		}
 		else if(strcmp(arg, "new") == 0)
 		{
-			fprintf(todo, "%s", strchr(buf, ' ')+1);
+			//fprintf(todo, "%s", strchr(buf, ' ')+1);
 		}
 		else if(strcmp(arg, "move") == 0)
 		{
