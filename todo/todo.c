@@ -92,8 +92,8 @@ int main(void)
 		}
 		else if(strcmp(arg, "new") == 0)
 		{
-			char *data = get_pointer_to_arg(1);
-			printf("ADDED: %S\nasd\n", data);
+			char *data = get_pointer_to_arg(buf, 1);
+			printf("ADDED: %s\nasd\n", data);
 			//fprintf(todo, "%s", strchr(buf, ' ')+1);
 		}
 		else if(strcmp(arg, "move") == 0)
