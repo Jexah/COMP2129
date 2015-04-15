@@ -29,7 +29,7 @@ char *get_arg_from_command(char *start, int arg)
 
 void strcpy_no_newline(char *dst, char *src)
 {
-	while(*dst++ = (*src != '\n') && *src++);
+	while(*src != '\n' && (*dst++ = (*src != '\n') && *src++));
 }
 
 void print_list(struct list_head *head_ptr)
@@ -92,7 +92,8 @@ int main(void)
 		}
 		else if(strcmp(arg, "new") == 0)
 		{
-			char *data = get_pointer_to_arg(buf, 1);
+			char data[sizeof(buf)];
+			strcpy_no_newline(data, get_pointer_to_arg(buf, 1));
 			printf("ADDED: %s\nasd\n", data);
 			//fprintf(todo, "%s", strchr(buf, ' ')+1);
 		}
