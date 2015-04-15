@@ -40,8 +40,8 @@ void populate_list(struct list_head *head_ptr)
 	while(fgets(buf, sizeof(buf), todo))
 	{
 		printf("%s\n", buf);
-		struct list_head *element = malloc(sizeof(struct list_head));
-		element->data = malloc(sizeof(buf));
+		struct list_head *element = calloc(sizeof(struct list_head), 1);
+		element->data = calloc(sizeof(buf), 1);
 		strcpy_no_newline(element->data, buf);
 		list_add(element, head_ptr);
 		printf("Prev: %s\nCurrent: %s\nNext: %s\n", element->prev->data, element->data, element->next->data);
