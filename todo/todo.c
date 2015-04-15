@@ -19,12 +19,12 @@ void get_arg_from_command(char *start, int arg, char *buffer)
 void print_list(struct list_head *head_ptr)
 {
 	int current_line = 1;
-	printf("%d. %s", current_line, head_ptr->data);
+	printf("%d. %s\n", current_line, head_ptr->data);
 	struct list_head *current_ptr = head_ptr->next;
 	while(current_ptr != head_ptr)
 	{
 		current_line++;
-		printf("%d. %s", current_line, current_ptr->data);
+		printf("%d. %s\n", current_line, current_ptr->data);
 	}
 }
 
@@ -36,6 +36,7 @@ void populate_list(struct list_head *head_ptr)
 	{
 		struct list_head *element = malloc(sizeof(struct list_head));
 		element->data = malloc(sizeof(buf));
+		strcpy(element->data, buf);
 		list_add_tail(element, head_ptr);
 	}
 }
