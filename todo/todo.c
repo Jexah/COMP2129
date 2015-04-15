@@ -51,6 +51,7 @@ void populate_list(struct list_head *head_ptr)
 int main(void)
 {
 	struct list_head list;
+	list.data = 0;
 	list_init(&list);
 	populate_list(&list);
 	//print_list(&list);
