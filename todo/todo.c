@@ -19,7 +19,8 @@ void get_arg_from_command(char *start, int arg, char *buffer)
 void print_list(struct list_head *head_ptr)
 {
 	int current_line = 1;
-	while(head_ptr = head_ptr->next != head_ptr)
+	printf("%d. %s", current_line, head_ptr->data);
+	while((head_ptr = head_ptr->next) != head_ptr)
 	{
 		printf("%d. %s", current_line, head_ptr->data);
 		current_line++;
