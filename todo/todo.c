@@ -97,7 +97,7 @@ int main(void)
 			element->data = data;
 			list_add_tail(element, &list);
 			print_list(&list);
-			printf('\n');
+			printf("\n");
 		}
 		else if(strcmp(arg, "move") == 0)
 		{
