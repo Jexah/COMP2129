@@ -16,22 +16,25 @@ void get_arg_from_command(char *start, int arg, char *buffer)
 	while(*start != '\n' && *start != ' ' && (*buffer++ = *start++));
 }
 
-void print_todo(FILE *todo)
+void print_list(struct list_head *head_ptr)
 {
+	int current_line = 1;
+	while(head_ptr = head_ptr->next != head_ptr)
+	{
+		printf("%d. %s", current_line, head_ptr->data);
+		current_line++;
+	}
 }
 
-void populate_list(list_head *list)
+void populate_list(struct list_head *head_ptr)
 {
 	FILE *todo = fopen("todo.txt", "rw+");
 	char buf[128];
-	int current_line = 1;
 	while(fgets(buf, sizeof(buf), todo))
 	{
-		struct list_head element;
-		element->data = malloc(
-		list_add(element, 
-		printf("%d. %s", current_line, buf);
-		current_line++;
+		struct list_head *element = malloc(sizeof(struct list_head));
+		element->data = malloc(buf);
+		list_add_tail(element, list);
 	}
 }
 
@@ -39,10 +42,11 @@ int main(void)
 {
 	struct list_head list;
 	list_init(&list);
-
+	populate_list(&list);
+	print_list(&list);
 
 	printf("\n> ");
-	
+
 	char buf[128];
 	char last_command [128];
 
@@ -75,6 +79,6 @@ int main(void)
 		}
 		printf("\n> ");
 	}
-	
+
     return 0;
 }
