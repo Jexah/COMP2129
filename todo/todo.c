@@ -85,7 +85,6 @@ int main(void)
 		strcpy(last_command, buf);
 
 		char *arg = get_arg_from_command(buf, 0);
-		printf("'%s'\n", arg);
 		if(strcmp(arg, "help") == 0)
 		{
 			printf("help, new, delete, move, undo\n");
@@ -98,14 +97,22 @@ int main(void)
 			element->data = data;
 			list_add_tail(element, &list);
 			print_list(&list);
+			printf('\n');
 		}
 		else if(strcmp(arg, "move") == 0)
 		{
-			// move
+
 		}
 		else if(strcmp(arg, "delete") == 0)
 		{
-			// delete
+			int del = atoi(get_arg_from_command(buf, 1)), i = 0;
+			struct list_head *target = &list;
+			while(i++ != del)
+			{
+				target = target->next;
+			}
+			list_del(target);
+			print_list(&list);
 		}
 		else if(strcmp(arg, "undo") == 0)
 		{
