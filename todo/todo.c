@@ -39,6 +39,7 @@ void populate_list(struct list_head *head_ptr)
 	char buf[128];
 	while(fgets(buf, sizeof(buf), todo))
 	{
+		printf("%s\n", buf);
 		struct list_head *element = malloc(sizeof(struct list_head));
 		element->data = malloc(sizeof(buf));
 		strcpy_no_newline(element->data, buf);
