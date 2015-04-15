@@ -20,10 +20,11 @@ void print_list(struct list_head *head_ptr)
 {
 	int current_line = 1;
 	printf("%d. %s", current_line, head_ptr->data);
-	while((head_ptr = (head_ptr->next)) != head_ptr)
+	struct list_head *current_ptr = head_ptr->next;
+	while((current_ptr != head_ptr)
 	{
-		printf("%d. %s", current_line, head_ptr->data);
 		current_line++;
+		printf("%d. %s", current_line, current_ptr->data);
 	}
 }
 
