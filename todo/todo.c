@@ -20,9 +20,14 @@ char *get_pointer_to_arg(char *start, int arg)
 
 char *get_arg_from_command(char *start, int arg)
 {
+	printf("start1: %s", start);
 	char *buffer = calloc(strlen(start), 1);
+	char *rolling = buffer;
 	start = get_pointer_to_arg(start, arg);
-	while(*start != '\n' && *start != ' ' && (*buffer++ = *start++));
+
+		printf("start2: %s", start);
+	while(*start != '\n' && *start != ' ' && (*rolling++ = *start++));
+			printf("buffer: %s", buffer);
 	return buffer;
 }
 
