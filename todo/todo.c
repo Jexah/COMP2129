@@ -15,6 +15,7 @@ char *get_pointer_to_arg(char *start, int arg)
 			start = strchr(start, ' ');
 		}
 	}
+	printf("ARG(1): %s", start);
 	return start;
 }
 
@@ -26,7 +27,7 @@ char *get_arg_from_command(char *start, int arg)
 	start = get_pointer_to_arg(start, arg);
 
 		printf("start2: %s", start);
-	while(*start != '\n' && *start != ' ' && (*rolling++ = *start++));
+	while(*start != '\n' && *start != ' ' && (*rolling++ = *start++)) ;
 			printf("buffer: %s", buffer);
 	return buffer;
 }
