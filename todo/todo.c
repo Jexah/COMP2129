@@ -105,7 +105,7 @@ int main(void)
 		}
 		else if(strcmp(arg, "delete") == 0)
 		{
-			int del = atoi(get_arg_from_command(buf, 1)), i = 0;
+			int del = atoi(get_arg_from_command(buf, 1)), i = 1;
 			struct list_head *target = &list;
 			while(i++ != del)
 			{
