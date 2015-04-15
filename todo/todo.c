@@ -4,13 +4,7 @@
 
 #include "list.h"
 
-char *get_arg_from_command(char *start, int arg)
-{
-	char *buffer = calloc(strlen(start), 1);
-	start = get_pointer_to_arg(start, arg);
-	while(*start != '\n' && *start != ' ' && (*buffer++ = *start++));
-	return buffer;
-}
+#define MAX_LINE_LEN 128
 
 char *get_pointer_to_arg(char *start, int arg)
 {
@@ -22,6 +16,14 @@ char *get_pointer_to_arg(char *start, int arg)
 		}
 	}
 	return start;
+}
+
+char *get_arg_from_command(char *start, int arg)
+{
+	char *buffer = calloc(strlen(start), 1);
+	start = get_pointer_to_arg(start, arg);
+	while(*start != '\n' && *start != ' ' && (*buffer++ = *start++));
+	return buffer;
 }
 
 void strcpy_no_newline(char *dst, char *src)
@@ -46,7 +48,7 @@ void populate_list(struct list_head *head_ptr)
 {
 	static int head_initialized = 0;
 	FILE *todo = fopen("todo.txt", "r");
-	char buf[128];
+	char buf[MAX_LINE_LEN];
 	while(fgets(buf, sizeof(buf), todo))
 	{
 		printf("%s\n", buf);
@@ -75,15 +77,14 @@ int main(void)
 
 	printf("\n> ");
 
-	char buf[128];
-	char last_command [128];
+	char buf[MAX_LINE_LEN];
+	char last_command[MAX_LINE_LEN];
 
 	while(fgets(buf, sizeof(buf), stdin))
 	{
 		strcpy(last_command, buf);
 
-		char arg[128] = {0};
-		get_arg_from_command(buf, 0, arg);
+		char *arg = get_arg_from_command(buf, 0);
 		printf("'%s'\n", arg);
 		if(strcmp(arg, "help") == 0)
 		{
