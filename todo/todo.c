@@ -12,29 +12,24 @@ char *get_pointer_to_arg(char *start, int arg)
 	{
 		if(i != arg)
 		{
-			start = strchr(start, ' ');
+			start = strchr(start, ' ')+1;
 		}
 	}
-	printf("ARG(1): %s", start);
 	return start;
 }
 
 char *get_arg_from_command(char *start, int arg)
 {
-	printf("start1: %s", start);
 	char *buffer = calloc(strlen(start), 1);
 	char *rolling = buffer;
 	start = get_pointer_to_arg(start, arg);
-
-		printf("start2: %s", start);
-	while(*start != '\n' && *start != ' ' && (*rolling++ = *start++)) ;
-			printf("buffer: %s", buffer);
+	while(*start != '\n' && *start != ' ' && (*rolling++ = *start++));
 	return buffer;
 }
 
 void strcpy_no_newline(char *dst, char *src)
 {
-	while(*src != '\n' && (*dst++ = *src++));
+	while(*dst++ = (*src != '\n') && *src++);
 }
 
 void print_list(struct list_head *head_ptr)
@@ -57,7 +52,6 @@ void populate_list(struct list_head *head_ptr)
 	char buf[MAX_LINE_LEN];
 	while(fgets(buf, sizeof(buf), todo))
 	{
-		printf("%s\n", buf);
 		if(head_initialized)
 		{
 			struct list_head *element = calloc(sizeof(struct list_head), 1);
