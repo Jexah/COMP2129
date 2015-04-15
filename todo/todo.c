@@ -64,7 +64,7 @@ int main(void)
 {
 	struct list_head list;
 	populate_list(&list);
-	//print_list(&list);
+	print_list(&list);
 
 	printf("\n> ");
 
