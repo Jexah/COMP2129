@@ -16,6 +16,11 @@ void get_arg_from_command(char *start, int arg, char *buffer)
 	while(*start != '\n' && *start != ' ' && (*buffer++ = *start++));
 }
 
+void strcpy_no_newline(char *dst, char *src)
+{
+	while(*src != '\n' && (*dst++ = *src++));
+}
+
 void print_list(struct list_head *head_ptr)
 {
 	int current_line = 1;
@@ -36,7 +41,7 @@ void populate_list(struct list_head *head_ptr)
 	{
 		struct list_head *element = malloc(sizeof(struct list_head));
 		element->data = malloc(sizeof(buf));
-		strcpy(element->data, buf);
+		strcpy_no_newline(element->data, buf);
 		list_add(element, head_ptr);
 		printf("Prev: %s\nCurrent: %s\nNext: %s\n", element->prev->data, element->data, element->next->data);
 	}
