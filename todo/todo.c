@@ -111,9 +111,9 @@ int main(void)
 			{
 				target = target->next;
 			}
-			if(target == list)
+			if(target == &list)
 			{
-				list = *(list->next);
+				list = *(list.next);
 			}
 			list_del(target);
 			print_list(&list);
