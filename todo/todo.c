@@ -116,6 +116,7 @@ int main(void)
 				list = *(list.next);
 			}
 			list_del(target);
+			populate_list(&list);
 			print_list(&list);
 		}
 		else if(strcmp(arg, "undo") == 0)
