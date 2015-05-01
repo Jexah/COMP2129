@@ -1,0 +1,18 @@
+set a 1 4 2 3 4 2
+snapshot
+min a
+max a
+sum a
+len a
+rev a
+get a
+sort a
+get a
+sort a
+get a
+uniq a
+get a
+checkout 1
+list snapshots
+list entries
+bye

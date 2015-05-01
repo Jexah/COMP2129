@@ -1,0 +1,15 @@
+list keys
+list entries
+list snapshots
+set a 1
+get a
+pop a
+get a
+pop a
+push a 2 1
+get a
+append a 3 4
+get a
+del a
+del a
+bye
